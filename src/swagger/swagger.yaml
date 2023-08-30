@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: Deel Code Challenge
+  description: Deel Code Challenge
+  version: 1.0.0
+paths:
+  /api/v1/contracts:
+    get:
+      security:
+        - cookieAuth: []
+      summary: Returns a list of contracts belonging to a user (client or contractor), the list should only contain non terminated contracts.
+      tags:
+        - Code Challenge Auth
+      description: Returns a list of contracts belonging to a user (client or contractor), the list should only contain non terminated contracts.
+      responses:
+        "200":
+          description: Returns a list of contracts belonging to a user (client or contractor), the list should only contain non terminated contracts.
+        default:
+          description: Unexpected error
+  /api/v1/contracts/:id:
+    get:
+      security:
+        - cookieAuth: []
+      summary: Should return the contract only if it belongs to the profile calling
+      tags:
+        - Code Challenge Auth
+      description: it should return the contract only if it belongs to the profile calling
+      parameters:
+        - name: id
+          in: path
+          description: Contract ID
+          required: true
+          example: 1
+      responses:
+        "200":
+          description: Should return the contract only if it belongs to the profile calling
+        default:
+          description: Unexpected error          
+
+tags:
+  - name: Code Challenge Auth
+    description: All the required interfaces by the Table Generator to Looker
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: profile_id  # cookie name
+
+# Applying cookie auth globally to all operations
+security:
+  - cookieAuth: []
