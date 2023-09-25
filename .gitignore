@@ -3,3 +3,5 @@ node_modules
 database.sqlite3
 tmp
 coverage
+.idea
+.nyc_output
